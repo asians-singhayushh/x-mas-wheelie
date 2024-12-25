@@ -13,7 +13,7 @@ const io = new Server(server, {
     }
 });
 
-const PORT = 3000;
+const PORT = 8000;
 
 const activeUsers: Record<string, string> = {};
 const cursorPositions: Record<string, { x: number; y: number }> = {};
