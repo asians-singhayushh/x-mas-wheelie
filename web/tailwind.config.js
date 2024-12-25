@@ -81,13 +81,63 @@ module.exports = {
           to: { height: 0 },
         },
       },
+      keyframes: {
+        bounce: {
+          '0%, 100%': {
+            transform: 'translateY(-0.5%)',
+            'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)',
+          },
+          '50%': {
+            transform: 'translateY(0)',
+            'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)',
+          },
+        },
+        float: {
+          '0%': {
+            'box-shadow': '0 5px 15px 0px rgba(0,0,0,0.6)',
+            transform: 'translateY(0px)',
+          },
+          '50%': {
+            'box-shadow': '0 25px 15px 0px rgba(0,0,0,0.2)',
+            transform: 'translateY(-20px)',
+          },
+          '100%': {
+            'box-shadow': '0 5px 15px 0px rgba(0,0,0,0.6)',
+            transform: 'translateY(0px)',
+          },
+        },
+      },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "collapsible-down": "collapsible-down 0.2s ease-in-out",
         "collapsible-up": "collapsible-up 0.2s ease-in-out",
+        "boounce": 'boounce 8s ease-in-out infinite',
+        float: 'float 5s ease-in-out infinite',
       },
     },
+    fontFamily: {
+			sans: [
+				"Geist",
+				"ui-sans-serif",
+				"system-ui",
+				"sans-serif",
+				"Apple Color Emoji",
+				"Segoe UI Emoji",
+				"Segoe UI Symbol",
+				"Noto Color Emoji",
+			],
+			heading: [
+				"Inter",
+				"ui-sans-serif",
+				"system-ui",
+				"sans-serif",
+				"Apple Color Emoji",
+				"Segoe UI Emoji",
+				"Segoe UI Symbol",
+				"Noto Color Emoji",
+			],
+		},
   },
   plugins: [animate],
 }

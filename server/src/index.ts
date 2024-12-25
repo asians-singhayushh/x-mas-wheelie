@@ -7,12 +7,17 @@ import cors from 'cors';
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "*"
+    }
+});
 
 const PORT = 3000;
 
 const activeUsers: Record<string, string> = {};
 const cursorPositions: Record<string, { x: number; y: number }> = {};
+const spinResults: Record<string, string> = {}; // To store spin results for each user
 
 app.use(cors({ origin: "*" }));
 app.use(express.json());
@@ -44,15 +49,23 @@ io.use((socket, next) => {
 
 io.on('connection', (socket) => {
     const username = socket.data.username;
-    console.log(`User connected: ${username}`);
 
     socket.on('setCursorPosition', ({ x, y }) => {
         cursorPositions[username] = { x, y };
         io.emit('updateCursorPositions', cursorPositions);
     });
 
+    socket.on('setSpinResult', (result: string) => {
+        spinResults[username] = result;
+        io.emit('spinResults', spinResults);
+    });
+
+    socket.on('fetchSpinResult', () => {
+        socket.emit('spinResults', spinResults);
+    });
+
+    // Handle user disconnection
     socket.on('disconnect', () => {
-        console.log(`User disconnected: ${username}`);
         delete cursorPositions[username];
         io.emit('updateCursorPositions', cursorPositions);
     });

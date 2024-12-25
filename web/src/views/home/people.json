@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "username": "surya",
+        "name": "Surya",
+        "email": "komang.suryadana@gmail.com",
+        "image": "/people/surya.png"
+    },
+    {
+        "id": 2,
+        "username": "ahmad",
+        "name": "Ahmad",
+        "email": "ahmad.sohail@asians.cloud",
+        "image": "/people/ahmad.png"
+    },
+    {
+        "id": 3,
+        "username": "sophie",
+        "name": "Sophie",
+        "email": "sophia.cue@asians.cloud",
+        "image": "/people/sophie.png"
+    },
+    {
+        "id": 4,
+        "username": "mahadi",
+        "name": "Mahadi",
+        "email": "mahadi.taronno@asians.cloud",
+        "image": "/people/mahadi.png"
+    },
+    {
+        "id": 5,
+        "username": "nitin",
+        "name": "Nitin",
+        "email": "nitin.barai@asians.cloud",
+        "image": "/people/nitin.png"
+    },
+    {
+        "id": 6,
+        "username": "jammel",
+        "name": "Jammel",
+        "email": "jammel.milan@asians.cloud",
+        "image": "/people/jammel.png"
+    },
+    {
+        "id": 7,
+        "username": "vaibhav",
+        "name": "Vaibhav",
+        "email": "vaibhav.chotaliya@asians.cloud",
+        "image": "/people/vaibhav.png"
+    },
+    {
+        "id": 8,
+        "username": "ayush",
+        "name": "Ayush",
+        "email": "ayush.singh@asians.cloud",
+        "image": "/people/ayush.png"
+    },
+    {
+        "id": 9,
+        "username": "karan",
+        "name": "Karan",
+        "email": "karan.bhardwaj@asians.cloud",
+        "image": "/people/karan.png"
+    },
+    {
+        "id": 10,
+        "username": "adeel",
+        "name": "Adeel",
+        "email": "adeel.sarwar@asians.cloud",
+        "image": "/people/adeel.png"
+    }
+]

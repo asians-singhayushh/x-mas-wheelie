@@ -22,7 +22,6 @@ import api from '@/lib/api';
 const users = [
   { value: 'ion', label: 'Ion' },
   { value: 'ludwig', label: 'Ludwig' },
-  { value: 'win', label: 'Win' },
   { value: 'sophie', label: 'Sophie' },
 ]
 
