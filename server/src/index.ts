@@ -64,6 +64,14 @@ io.on('connection', (socket) => {
         socket.emit('spinResults', spinResults);
     });
 
+    socket.on('spinStart', (winner: string) => {
+        socket.broadcast.emit('spinStart', winner);
+    });
+
+    socket.on('resetWheel', () => {
+        socket.broadcast.emit('resetWheel');
+    });
+
     // Handle user disconnection
     socket.on('disconnect', () => {
         delete cursorPositions[username];
