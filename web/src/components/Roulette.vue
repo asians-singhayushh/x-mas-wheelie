@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, nextTick, inject } from 'vue';
+import { ref, computed, nextTick, inject, onMounted } from 'vue';
 import { confetti, getRandomBgClass } from '@/utils/helper';
 import { Roulette } from 'vue3-roulette';
 import { Separator } from '@/components/ui/separator';
@@ -19,6 +19,7 @@ const props = defineProps({
 const socket = inject<Socket>('socket');
 
 const wheelRef = ref();
+const wheelResult = ref<any | null>(null);
 const wheelActive = ref(true);
 const result = ref<any | null>(null);
 
@@ -73,12 +74,12 @@ const wheelData = {
 };
 
 const wheelStartedCallback = (resultItem: any) => {
-    console.log('wheel started !', resultItem);
+    socket?.emit('spinStart', resultItem.username);
 };
 
 const wheelEndedCallback = (resultItem: any) => {
-    console.log('wheel ended !', resultItem);
-    socket?.emit('setSpinResult', resultItem.username);
+    if (!wheelResult.value)
+        socket?.emit('setSpinResult', resultItem.username);
     result.value = resultItem;
     celebrate();
 };
@@ -89,9 +90,25 @@ const celebrate = () => {
 };
 
 const reset = () => {
+    socket?.emit('resetWheel');
     wheelActive.value = true;
+    wheelResult.value = null;
     randomizedPeople.value = shuffleArray([...props.people]);
 };
+
+onMounted(() => {
+    socket?.on('spinStart', (winner: string) => {
+        wheelActive.value = true;
+        const index = wheelItems.value.findIndex(item => item.username === winner);
+        wheelResult.value = index >= 0 ? { value: index } : null;
+        launchWheel();
+    });
+    socket?.on('resetWheel', () => {
+        wheelActive.value = true;
+        wheelResult.value = null;
+        randomizedPeople.value = shuffleArray([...props.people]);
+    })
+});
 
 </script>
 
@@ -109,8 +126,10 @@ const reset = () => {
             :base-display="wheelData.wheelSettings.baseDisplay" :base-size="wheelData.wheelSettings.baseSize"
             :base-display-indicator="wheelData.wheelSettings.baseDisplayIndicator"
             :base-display-shadow="wheelData.wheelSettings.baseDisplayShadow"
+            v-bind="wheelResult !== null ? { 'wheel-result-index': wheelResult } : {}"
             :base-background="wheelData.wheelSettings.baseBackground" @click="launchWheel"
-            @wheel-start="wheelStartedCallback" @wheel-end="wheelEndedCallback">
+            v-on="wheelResult === null ? { 'wheel-start': wheelStartedCallback } : {}"
+            @wheel-end="wheelEndedCallback">
             <template #baseContent>
                 <strong class="text-white">Spin!</strong>
             </template>
