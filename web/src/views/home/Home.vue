@@ -149,7 +149,7 @@ const isHighlighted = (username: string): boolean => {
                     <CardTitle>Spin the Wheelie!</CardTitle>
                 </CardHeader>
                 <CardContent class="grow">
-                    <!-- <RouletteWheel :people="people" /> -->
+                    <RouletteWheel :people="people" />
                 </CardContent>
             </Card>
 
